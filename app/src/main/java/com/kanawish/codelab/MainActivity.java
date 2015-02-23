@@ -7,7 +7,11 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.ListView;
+
+import com.kanawish.codelab.model.User;
 
 /**
  * This is an example being built for Intro-to-Android CodeLabs
@@ -36,13 +40,30 @@ public class MainActivity extends ActionBarActivity {
 		Toolbar toolbar = (Toolbar) findViewById(R.id.my_awesome_toolbar);
 		setSupportActionBar(toolbar);
 
+		// List View + Adapter
+		ListView listView = (ListView)findViewById(R.id.userListView);
+		final UsersAdapter usersAdapter = new UsersAdapter(this, User.buildMockUserList());
+		listView.setAdapter(usersAdapter);
+
 		Button button = (Button) findViewById(R.id.simpleButton);
 		button.setOnClickListener(new View.OnClickListener() {
+			int counter = 0;
 			@Override
 			public void onClick(View v) {
 				Log.d(TAG, "simpleButton click listener was called.");
+				usersAdapter.add(new User("Johnny", "Number "+ ++counter));
 			}
 		});
+
+		// Quick and dirty example of handling clicks
+		listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+				User user = usersAdapter.getItem(position);
+				Log.d(TAG, "User clicked on " + user.getFirstName());
+			}
+		});
+
 	}
 
 	@Override

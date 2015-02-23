@@ -236,6 +236,135 @@ Let's add a button to our layout.
 
 ## 3 ListView and Detail Activities
 
+
+---
+
+### `activity_main.xml` - Add the list view to your UI layout.
+
+```xml
+       <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent">
+
+			<!-- ... -->
+			
+          <ListView
+                android:id="@+id/userListView"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:background="?attr/colorAccent"
+                />
+                
+       </LinearLayout>
+```
+
+---
+
+### `User.java`
+
+```java
+public class User {
+
+	String firstName;
+	String lastName;
+
+	public User(String firstName, String lastName) {
+		this.firstName = firstName;
+		this.lastName = lastName;
+	}
+
+	public String getFirstName() {
+		return firstName;
+	}
+
+	public String getLastName() {
+		return lastName;
+	}
+}
+```
+
+---
+
+### `User.java`, continued
+
+```java
+...
+	public static List<User> buildMockUserList() {
+		ArrayList<User> users = new ArrayList<>();
+
+		users.add(new User("Alice", "Alguard"));
+		users.add(new User("Bob", "Barker"));
+		users.add(new User("Charles", "Colander"));
+		users.add(new User("Damien", "Delany"));
+
+		return users;
+	}
+...
+```
+
+---
+
+### `UsersAdapter.java`
+
+```java
+class UsersAdapter extends ArrayAdapter<User> {
+	// ...
+	@Override
+	public View getView(int position, View convertView, ViewGroup parent) {
+
+		// Get the data item for this position
+		User user = getItem(position);
+
+		// Check if an existing view is being reused, otherwise inflate the view
+		if (convertView == null) {
+			convertView = LayoutInflater.from(getContext()).inflate(android.R.layout.simple_list_item_2, parent, false);
+		}
+
+		// Lookup view for data population
+		TextView firstName = (TextView) convertView.findViewById(android.R.id.text1);
+		TextView lastName = (TextView) convertView.findViewById(android.R.id.text2);
+
+		// Populate the data into the template view using the data object
+		firstName.setText(user.getFirstName());
+		lastName.setText(user.getLastName());
+
+		// Return the completed view to render on screen
+		return convertView;
+	}
+}
+```
+
+---
+
+### `MainActivity.java onCreate()`
+
+```java
+		// List View + Adapter
+		ListView listView = (ListView)findViewById(R.id.userListView);
+		final UsersAdapter usersAdapter = new UsersAdapter(this, User.buildMockUserList());
+		listView.setAdapter(usersAdapter);
+
+		Button button = (Button) findViewById(R.id.simpleButton);
+		button.setOnClickListener(new View.OnClickListener() {
+			int counter = 0;
+			@Override
+			public void onClick(View v) {
+				Log.d(TAG, "simpleButton click listener was called.");
+				usersAdapter.add(new User("Johnny", "Number "+ ++counter));
+			}
+		});
+
+		// Quick and dirty example of handling clicks
+		listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+				User user = usersAdapter.getItem(position);
+				Log.d(TAG, "User clicked on " + user.getFirstName());
+			}
+		});
+```
+
 ---
 
 ## 4 Using APIs (Retrofit and GitHub)
