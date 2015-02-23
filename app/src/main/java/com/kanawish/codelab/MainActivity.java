@@ -2,18 +2,35 @@ package com.kanawish.codelab;
 
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
-
+/**
+ * This is an example being built for Intro-to-Android CodeLabs
+ *
+ * TODO: I'm looking into using (this)[https://github.com/Abnaxos/pegdown-doclet] to format the javadoc
+ *
+ * It uses examples and tutorials from various sources.
+ *
+ * ## 1. Theming and retro-compatible Material design
+ *
+ * - [Android Dev post](http://android-developers.blogspot.ca/2014/10/appcompat-v21-material-design-for-pre.html)
+ * - [Chris Banes](https://chris.banes.me/2014/10/17/appcompat-v21/)
+ *
+ *
+ */
 public class MainActivity extends ActionBarActivity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-	}
 
+		// Assigning the toolbar to "ActionBar duty".
+		Toolbar toolbar = (Toolbar) findViewById(R.id.my_awesome_toolbar);
+		setSupportActionBar(toolbar);
+	}
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {

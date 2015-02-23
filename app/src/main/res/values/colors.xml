@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="my_awesome_color">#F00</color>
+    <color name="my_awesome_darker_color">#A00</color>
+    <color name="accent">#fe0</color>
+    <color name="blue_selected">#33b5e5</color>
+    <color name="gray">#d3d3d3</color>
+    <color name="transparent">#00000000</color>
+</resources>
