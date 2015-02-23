@@ -171,7 +171,66 @@ This segment was inspired by [this Android-Dev blog post](http://android-develop
 
 ## 2 Handling events
 
+A quick look at the basics of handling events, layouts, and using logcat.
 
+---
+
+### `activity_main.xml`
+
+Let's add a button to our layout.
+
+^ The text definition here leaves to be desired, give a quick demo on `strings.xml` usage time permitting.
+
+```xml
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent">
+            <Button
+                android:id="@+id/simpleButton"
+                android:text="Click me"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:text="@string/hello_world"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+```
+
+---
+
+### `MainActivity.java`
+
+^ Button is found in layout, cast to proper type, then we assign a click listener.
+
+^ Point out how Logs are used, the idea behind TAG constant, and show a live log of the button being clicked. 
+
+^ Demo the in-IDE logs for simplicity, could touch on pidcat to show off colors.
+
+^ Make sure everybody has grasped 1 + 2 before moving on to 3.
+
+```java
+	private static final String TAG = MainActivity.class.getSimpleName();
+
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_main);
+
+		// Assigning the toolbar to "ActionBar duty".
+		Toolbar toolbar = (Toolbar) findViewById(R.id.my_awesome_toolbar);
+		setSupportActionBar(toolbar);
+
+		Button button = (Button) findViewById(R.id.simpleButton);
+		button.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				Log.d(TAG, "simpleButton click listener was called.");
+			}
+		});
+	}
+```
 
 ---
 

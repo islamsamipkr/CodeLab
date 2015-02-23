@@ -3,8 +3,11 @@ package com.kanawish.codelab;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 
 /**
  * This is an example being built for Intro-to-Android CodeLabs
@@ -22,6 +25,8 @@ import android.view.MenuItem;
  */
 public class MainActivity extends ActionBarActivity {
 
+	private static final String TAG = MainActivity.class.getSimpleName();
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -30,6 +35,14 @@ public class MainActivity extends ActionBarActivity {
 		// Assigning the toolbar to "ActionBar duty".
 		Toolbar toolbar = (Toolbar) findViewById(R.id.my_awesome_toolbar);
 		setSupportActionBar(toolbar);
+
+		Button button = (Button) findViewById(R.id.simpleButton);
+		button.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				Log.d(TAG, "simpleButton click listener was called.");
+			}
+		});
 	}
 
 	@Override
