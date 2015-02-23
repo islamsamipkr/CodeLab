@@ -41,6 +41,12 @@ We'll try to cover:
 - Using APIs (Retrofit and Github)
 - Fragments
 
+---
+
+# on GitHub: 
+
+[https://github.com/kanawish/CodeLab.git](https://github.com/kanawish/CodeLab.git)
+
 --- 
 
 ## 1. Theming and retro-compatible Material design  
